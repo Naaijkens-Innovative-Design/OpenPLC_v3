@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 #Use this for OpenPLC console: http://eyalarubas.com/python-subproc-nonblock.html
 import subprocess
 import socket
