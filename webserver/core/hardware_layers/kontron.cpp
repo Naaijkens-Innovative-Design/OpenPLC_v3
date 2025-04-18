@@ -114,11 +114,11 @@ void updateBuffersOut()
     char data = *bool_output[0][0];
 
     if(pcf8574 != NULL) {
-        if(write(pcf8574, data, 1) < 0) {
-            sprintf(log_msg, "error writing i2c device\n");
+        if(write(pcf8574, &data, 1) < 0) {
+            sprintf(log_msg, "error writing i2c device, writing: %d\n", data);
+            log(log_msg);
         }
     }
-
 
     /*********READING AND WRITING TO I/O**************
 
