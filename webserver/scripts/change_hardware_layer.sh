@@ -136,6 +136,13 @@ elif [ "$1" == "piplc" ]; then
     echo rpi > ../scripts/openplc_platform
     echo piplc > ../scripts/openplc_driver
 
+elif [ "$1" == "kontron" ]; then
+    echo "Activating Kontron driver"
+    cp ./hardware_layers/kontron.cpp ./hardware_layer.cpp
+    echo "Setting Platform"
+    echo linux > ../scripts/openplc_platform
+    echo kontron > ../scripts/openplc_driver
+
 else
     echo "Error: Invalid hardware layer"
 fi
