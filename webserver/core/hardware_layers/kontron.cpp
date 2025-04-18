@@ -97,7 +97,7 @@ int i2cSetup(int addr)
             log(log_msg);
             return ERROR;
         } else {
-            log_info("i2c bus initialized");
+            LOG_INFO("i2c bus initialized");
         }
     }
     if (ioctl(file, I2C_SLAVE, addr) < 0)
@@ -106,7 +106,7 @@ int i2cSetup(int addr)
         log(log_msg);
         return ERROR;
     } else {
-        log_info("i2c slave initialized");
+        LOG_INFO("i2c slave initialized");
     }
     return file;
 }
