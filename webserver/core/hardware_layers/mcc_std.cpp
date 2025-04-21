@@ -48,7 +48,7 @@ enum mmc_io_dir {
 
 struct mmc_io_component {
     mmc_io_dir dir;
-    uint8_t **ptr;
+    uint8_t *ptr;
 };
 
 struct mcc_io_mapping {
@@ -62,68 +62,68 @@ struct mcc_io_mapping mmc_io_modules[5] = {
         .addr = 0x20,
         .size = 8,
         {
-            { .dir = IN, .ptr = &bool_input[0][3] },
-            { .dir = IN, .ptr = &bool_input[0][2] },
-            { .dir = IN, .ptr = &bool_input[0][1] },
-            { .dir = IN,  .ptr = &bool_input[0][0] },
-            { .dir = OUT, .ptr = &bool_output[0][3] },
-            { .dir = OUT, .ptr = &bool_output[0][2] },
-            { .dir = OUT, .ptr = &bool_output[0][1] },
-            { .dir = OUT, .ptr = &bool_output[0][0] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][3] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][2] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][1] },
+            { .dir = IN,  .ptr = (uint8_t*)&bool_input[0][0] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][3] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][2] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][1] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][0] },
         },
     },
     {   /* DO-12[4-7] */
         .addr = 0x21,
         .size = 8,
         {
-            { .dir = IN, .ptr = &bool_input[0][7] },
-            { .dir = IN, .ptr = &bool_input[0][6] },
-            { .dir = IN, .ptr = &bool_input[0][5] },
-            { .dir = IN,  .ptr = &bool_input[0][4] },
-            { .dir = OUT, .ptr = &bool_output[0][7] },
-            { .dir = OUT, .ptr = &bool_output[0][6] },
-            { .dir = OUT, .ptr = &bool_output[0][5] },
-            { .dir = OUT, .ptr = &bool_output[0][4] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][7] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][6] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][5] },
+            { .dir = IN,  .ptr = (uint8_t*)&bool_input[0][4] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][7] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][6] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][5] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][4] },
         },
     },
     {   /* DO-12[8-11] */
         .addr = 0x22,
         .size = 8,
         {
-            { .dir = IN, .ptr = &bool_input[1][3] },
-            { .dir = IN, .ptr = &bool_input[1][2] },
-            { .dir = IN, .ptr = &bool_input[1][1] },
-            { .dir = IN,  .ptr = &bool_input[1][0] },
-            { .dir = OUT, .ptr = &bool_output[1][3] },
-            { .dir = OUT, .ptr = &bool_output[1][2] },
-            { .dir = OUT, .ptr = &bool_output[1][1] },
-            { .dir = OUT, .ptr = &bool_output[1][0] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[1][3] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[1][2] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[1][1] },
+            { .dir = IN,  .ptr = (uint8_t*)&bool_input[1][0] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[1][3] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[1][2] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[1][1] },
+            { .dir = OUT, .ptr = (uint8_t*)&bool_output[1][0] },
         },
     },
     {   /* DI-12[0-5] */
         .addr = 0x23,
         .size = 7,
         {
-            { .dir = IN, .ptr = &bool_input[2][0] },
-            { .dir = IN, .ptr = &bool_input[2][1] } ,
-            { .dir = IN, .ptr = &bool_input[2][2] },
-            { .dir = IN, .ptr = &bool_input[2][3] },
-            { .dir = IN, .ptr = &bool_input[2][4] },
-            { .dir = IN, .ptr = &bool_input[2][5] },
-            { .dir = IN, .ptr = &bool_input[2][6] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][0] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][1] } ,
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][2] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][3] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][4] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][5] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][6] },
         },
     },
     {   /* DI-12[6-11] */
         .addr = 0x24,
         .size = 7,
         {
-            { .dir = IN, .ptr = &bool_input[3][0] },
-            { .dir = IN, .ptr = &bool_input[3][1] },
-            { .dir = IN, .ptr = &bool_input[3][2] },
-            { .dir = IN, .ptr = &bool_input[3][3] },
-            { .dir = IN, .ptr = &bool_input[3][4] },
-            { .dir = IN, .ptr = &bool_input[3][5] },
-            { .dir = IN, .ptr = &bool_input[3][5] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][0] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][1] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][2] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][3] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][4] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][5] },
+            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][5] },
         },
     },
 };
@@ -207,13 +207,13 @@ void updateBuffersIn()
             goto out;
         } else {
             if(read(i2c_bus, &data, 1) < 0) {
-                sprintf(log_msg, "error reading i2c device: %d\n", i);
-                log(log_msg);
+                //sprintf(log_msg, "error reading i2c device: %d\n", i);
+                //log(log_msg);
                 continue;
             }
             for(int s = 0; s < mmc_io_modules[i].size; s++) {
                 if((mmc_io_modules[i].io[s].dir == IN) && (mmc_io_modules[i].io[s].ptr != NULL)) {
-                    **mmc_io_modules[i].io[s].ptr = (data >> s) & 1;
+                    *mmc_io_modules[i].io[s].ptr = (data >> s) & 1;
                 }
             }
         }
@@ -251,12 +251,12 @@ void updateBuffersOut()
             data = 0;
             for(int s = 0; s < mmc_io_modules[i].size; s++) {
                 if((mmc_io_modules[i].io[s].dir == IN) && (mmc_io_modules[i].io[s].ptr != NULL)) {
-                    data  |= ((**mmc_io_modules[i].io[s].ptr & 1) << 1);
+                    data  |= ((*mmc_io_modules[i].io[s].ptr & 1) << 1);
                 }
             }
             if(write(i2c_bus, &data, 1) < 0) {
-                sprintf(log_msg, "error reading i2c device: %d\n", i);
-                log(log_msg);
+                //sprintf(log_msg, "error writing i2c device: %d\n", i);
+                //log(log_msg);
                 continue;
             }
         }
