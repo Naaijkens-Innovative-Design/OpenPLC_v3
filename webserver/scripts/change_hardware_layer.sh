@@ -143,6 +143,13 @@ elif [ "$1" == "kontron" ]; then
     echo linux > ../scripts/openplc_platform
     echo kontron > ../scripts/openplc_driver
 
+elif [ "$1" == "mcc_std" ]; then
+    echo "Activating MCC driver"
+    cp ./hardware_layers/mcc_std.cpp ./hardware_layer.cpp
+    echo "Setting Platform"
+    echo linux > ../scripts/openplc_platform
+    echo mcc_std > ../scripts/openplc_driver
+
 else
     echo "Error: Invalid hardware layer"
 fi
