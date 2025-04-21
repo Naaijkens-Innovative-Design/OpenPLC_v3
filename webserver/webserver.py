@@ -1785,8 +1785,10 @@ def hardware():
             else: return_str += "<option value='sl_rp4'>SL-RP4</option>"
             if (current_driver == "piplc"): return_str += "<option selected='selected' value='piplc'>Binary-6 PiPLC</option>"
             else: return_str += "<option value='piplc'>Binary-6 PiPLC</option>"
-            if (current_driver == "kontron"): return_str += "<option selected='selected' value='kontron'>Kontron i.MX6UL SOM</option>"
-            else: return_str += "<option value='kontron'>Kontron i.MX6UL SOM</option>"
+            if (current_driver == "kontron"): return_str += "<option selected='selected' value='kontron'>Kontron i.MX6UL SOM Test</option>"
+            else: return_str += "<option value='kontron'>Kontron i.MX6UL SOM Test</option>"
+            if (current_driver == "mcc_std"): return_str += "<option selected='selected' value='mcc_std'>Main Control Cabinet default configuration</option>"
+            else: return_str += "<option value='mcc_std'>Main Control Cabinet default configuration</option>"
             return_str += """
                         </select>
                         <br>
