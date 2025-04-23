@@ -9,5 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Configure linux
+    - name: install script
       run: bash install.sh linux
+    - name: compile blank_program
+      run: cd webserver
+        bash scripts/change_hardware_layer.sh blank_linux
+        bash scripts/compile_program.sh blank_program.st
