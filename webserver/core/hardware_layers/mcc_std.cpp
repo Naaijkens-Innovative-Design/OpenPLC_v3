@@ -247,7 +247,7 @@ void updateBuffersOut()
             data = 0;
             for(int s = 0; s < mmc_io_modules[i].size; s++) {
                 if((mmc_io_modules[i].io[s].dir == OUT) && (bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx] != NULL)) {
-                    data  |= ((*bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx] & 1) << 1);
+                    data  |= ((*bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx] & 1) << s);
 		            //sprintf(log_msg, "dbg: bank: %d, bit: %d, data: %x, ptr_addr: %x\n", mmc_io_modules[i].io[s].bank_idx, mmc_io_modules[i].io[s].bit_idx, *bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx], (uint32_t) bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx]);
                     //log(log_msg);
                 } else {
