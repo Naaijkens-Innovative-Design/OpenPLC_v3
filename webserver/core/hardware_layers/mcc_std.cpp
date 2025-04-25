@@ -48,7 +48,8 @@ enum mmc_io_dir {
 
 struct mmc_io_component {
     mmc_io_dir dir;
-    uint8_t *ptr;
+    uint8_t bank_idx;
+    uint8_t bit_idx;
 };
 
 struct mcc_io_mapping {
@@ -57,73 +58,79 @@ struct mcc_io_mapping {
     struct mmc_io_component io[8];
 };
 
+/* WARNING:
+ * variable arrays bool_input, bool_output etc... are NOT initialized when initializeHardware is called
+ * and during the first run of updateBuffersIn and updateBuffersOut,
+ * so we can't use compile time pointers!!!!
+ */
+
 struct mcc_io_mapping mmc_io_modules[5] = {
     {   /* DO-12[0-3] */
         .addr = 0x20,
         .size = 8,
         {
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][3] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][2] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][1] },
-            { .dir = IN,  .ptr = (uint8_t*)&bool_input[0][0] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][3] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][2] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][1] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][0] },
+            { .dir = IN, .bank_idx = 0, .bit_idx = 3 },
+            { .dir = IN, .bank_idx = 0, .bit_idx = 2 },
+            { .dir = IN, .bank_idx = 0, .bit_idx = 1 },
+            { .dir = IN, .bank_idx = 0, .bit_idx = 0 },
+            { .dir = OUT, .bank_idx = 0, .bit_idx = 3 },
+            { .dir = OUT, .bank_idx = 0, .bit_idx = 2 },
+            { .dir = OUT, .bank_idx = 0, .bit_idx = 1 },
+            { .dir = OUT, .bank_idx = 0, .bit_idx = 0 },
         },
     },
     {   /* DO-12[4-7] */
         .addr = 0x21,
         .size = 8,
         {
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][7] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][6] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[0][5] },
-            { .dir = IN,  .ptr = (uint8_t*)&bool_input[0][4] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][7] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][6] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][5] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[0][4] },
+            { .dir = IN, .bank_idx = 0, .bit_idx = 7 },
+            { .dir = IN, .bank_idx = 0, .bit_idx = 6 },
+            { .dir = IN, .bank_idx = 0, .bit_idx = 5 },
+            { .dir = IN, .bank_idx = 0, .bit_idx = 4 },
+            { .dir = OUT, .bank_idx = 0, .bit_idx = 7 },
+            { .dir = OUT, .bank_idx = 0, .bit_idx = 6 },
+            { .dir = OUT, .bank_idx = 0, .bit_idx = 5 },
+            { .dir = OUT, .bank_idx = 0, .bit_idx = 4 },
         },
     },
     {   /* DO-12[8-11] */
         .addr = 0x22,
         .size = 8,
         {
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[1][3] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[1][2] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[1][1] },
-            { .dir = IN,  .ptr = (uint8_t*)&bool_input[1][0] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[1][3] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[1][2] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[1][1] },
-            { .dir = OUT, .ptr = (uint8_t*)&bool_output[1][0] },
+            { .dir = IN, .bank_idx = 1, .bit_idx = 3 },
+            { .dir = IN, .bank_idx = 1, .bit_idx = 2 },
+            { .dir = IN, .bank_idx = 1, .bit_idx = 1 },
+            { .dir = IN, .bank_idx = 1, .bit_idx = 0 },
+            { .dir = OUT, .bank_idx = 1, .bit_idx = 3 },
+            { .dir = OUT, .bank_idx = 1, .bit_idx = 2 },
+            { .dir = OUT, .bank_idx = 1, .bit_idx = 1 },
+            { .dir = OUT, .bank_idx = 1, .bit_idx = 0 },
         },
     },
     {   /* DI-12[0-5] */
         .addr = 0x23,
         .size = 7,
         {
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][0] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][1] } ,
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][2] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][3] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][4] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][5] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[2][6] },
+            { .dir = IN, .bank_idx = 2, .bit_idx = 0 },
+            { .dir = IN, .bank_idx = 2, .bit_idx = 1 },
+            { .dir = IN, .bank_idx = 2, .bit_idx = 2 },
+            { .dir = IN, .bank_idx = 2, .bit_idx = 3 },
+            { .dir = IN, .bank_idx = 2, .bit_idx = 4 },
+            { .dir = IN, .bank_idx = 2, .bit_idx = 5 },
+            { .dir = IN, .bank_idx = 2, .bit_idx = 6 },
         },
     },
     {   /* DI-12[6-11] */
         .addr = 0x24,
         .size = 7,
         {
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][0] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][1] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][2] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][3] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][4] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][5] },
-            { .dir = IN, .ptr = (uint8_t*)&bool_input[3][5] },
+            { .dir = IN, .bank_idx = 3, .bit_idx = 0 },
+            { .dir = IN, .bank_idx = 3, .bit_idx = 1 },
+            { .dir = IN, .bank_idx = 3, .bit_idx = 2 },
+            { .dir = IN, .bank_idx = 3, .bit_idx = 3 },
+            { .dir = IN, .bank_idx = 3, .bit_idx = 4 },
+            { .dir = IN, .bank_idx = 3, .bit_idx = 5 },
+            { .dir = IN, .bank_idx = 3, .bit_idx = 6 },
         },
     },
 };
@@ -198,35 +205,25 @@ void updateBuffersIn()
     uint8_t data; 
 
     pthread_mutex_lock(&bufferLock); //lock mutex
-
     /*********READING AND WRITING TO I/O**************/
-
     for(int i = 0; i < MMC_NR_IO_MODULES; i++) {
         if(ioctl(i2c_bus, I2C_SLAVE, mmc_io_modules[i].addr) < 0) {
             /* asume that higher addressed device are not available */
             goto out;
         } else {
             if(read(i2c_bus, &data, 1) < 0) {
-                //sprintf(log_msg, "error reading i2c device: %d\n", i);
+                //sprintf(log_msg, "error reading i2c device: %x\n", mmc_io_modules[i].addr);
                 //log(log_msg);
                 continue;
             }
             for(int s = 0; s < mmc_io_modules[i].size; s++) {
-                if((mmc_io_modules[i].io[s].dir == IN) && (mmc_io_modules[i].io[s].ptr != NULL)) {
-                    *mmc_io_modules[i].io[s].ptr = (data >> s) & 1;
+                if((mmc_io_modules[i].io[s].dir == IN) && (bool_input[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx] != NULL)) {
+                    *bool_input[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx] = (data >> s) & 1;
                 }
             }
         }
     }
-
-    /*
-    *bool_input[0][0] = read_digital_input(0);
-    write_digital_output(0, *bool_output[0][0]);
-
-    *int_input[0] = read_analog_input(0);
-    write_analog_output(0, *int_output[0]);
-
-    **************************************************/
+    /**************************************************/
 out:
     pthread_mutex_unlock(&bufferLock); //unlock mutex
 }
@@ -240,7 +237,6 @@ void updateBuffersOut()
 {
     uint8_t data;
     pthread_mutex_lock(&bufferLock); //lock mutex
-
     /*********READING AND WRITING TO I/O**************/
 
     for(int i = 0; i < MMC_NR_IO_MODULES; i++) {
@@ -250,12 +246,17 @@ void updateBuffersOut()
         } else {            
             data = 0;
             for(int s = 0; s < mmc_io_modules[i].size; s++) {
-                if((mmc_io_modules[i].io[s].dir == IN) && (mmc_io_modules[i].io[s].ptr != NULL)) {
-                    data  |= ((*mmc_io_modules[i].io[s].ptr & 1) << 1);
+                if((mmc_io_modules[i].io[s].dir == OUT) && (bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx] != NULL)) {
+                    data  |= ((*bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx] & 1) << 1);
+		            sprintf(log_msg, "dbg: bank: %d, bit: %d, data: %x, ptr_addr: %x\n", mmc_io_modules[i].io[s].bank_idx, mmc_io_modules[i].io[s].bit_idx, *bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx], (uint32_t) bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx]);
+                    log(log_msg);
+                } else {
+                    sprintf(log_msg, "dbg: bank: %d, bit: %d, ptr_addr: %x\n", mmc_io_modules[i].io[s].bank_idx, mmc_io_modules[i].io[s].bit_idx, (uint32_t) bool_output[mmc_io_modules[i].io[s].bank_idx][mmc_io_modules[i].io[s].bit_idx]);
+                    log(log_msg);
                 }
             }
             if(write(i2c_bus, &data, 1) < 0) {
-                //sprintf(log_msg, "error writing i2c device: %d\n", i);
+                //sprintf(log_msg, "error writing i2c device: %x\n", mmc_io_modules[i].addr);
                 //log(log_msg);
                 continue;
             }
