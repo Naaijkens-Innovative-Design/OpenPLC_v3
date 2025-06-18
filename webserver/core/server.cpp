@@ -180,15 +180,27 @@ int listenToClient(int client_fd, unsigned char *buffer)
 //-----------------------------------------------------------------------------
 void processMessage(unsigned char *buffer, int bufferSize, int client_fd, int protocol_type)
 {
+    int messageSize = 0;
     if (protocol_type == MODBUS_PROTOCOL)
     {
-        int messageSize = processModbusMessage(buffer, bufferSize);
-        write(client_fd, buffer, messageSize);
+        messageSize = processModbusMessage(buffer, bufferSize);
     }
     else if (protocol_type == ENIP_PROTOCOL)
     {
-        int messageSize = processEnipMessage(buffer, bufferSize);
-        write(client_fd, buffer, messageSize);
+        messageSize = processEnipMessage(buffer, bufferSize);
+    }
+    while (messageSize > 0)
+    {
+        ssize_t bytesWritten = write(client_fd, buffer, messageSize);
+        if (bytesWritten < 0)
+        {
+            char log_msg[1000];
+            sprintf(log_msg, "Server: Error writing response: %zd\n", bytesWritten);
+            log(log_msg);
+            break;
+        }
+        buffer += bytesWritten;
+        messageSize -= bytesWritten;
     }
 }
 
@@ -218,7 +230,14 @@ void *handleConnections(void *arguments)
         //unsigned char buffer[NET_BUFFER_SIZE];
         //int messageSize;
 
-        messageSize = listenToClient(client_fd, buffer);
+        if (protocol_type == MODBUS_PROTOCOL)
+        {
+            messageSize = readModbusMessage(client_fd, buffer, sizeof(buffer) / sizeof(buffer[0]));
+        }
+        else
+        {
+            messageSize = listenToClient(client_fd, buffer);
+        }
         if (messageSize <= 0 || messageSize > NET_BUFFER_SIZE)
         {
             // something has  gone wrong or the client has closed connection
